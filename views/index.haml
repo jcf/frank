@@ -1,0 +1,53 @@
+!!! 5
+%html
+  %head
+    %title Frank Loves Documents
+    %link{ :rel => 'stylesheet', :href => '/frank.css', :type => 'text/css', :media => 'screen, projector' }
+  %body
+    #container
+      %h1
+        %a{ :href => '/' }
+          Frank Loves Documents
+
+      - @errors.each do |error|
+        %p.error= error
+
+      %form{ :action => '/documents', :method => 'post' }
+        %fieldset
+          %p
+            %label{ :for => 'document_title' }
+              Title:
+
+            %br
+
+            %input#document_title{ :type => 'text', :name => 'document[title]', :value => @document.title }
+
+          %p
+            %label{ :for => 'document_body' }
+              Body:
+
+            %br
+
+            %textarea#document_body{ :name => 'document[body]' }
+              = @document.body
+
+          %p
+            %input{ :type => 'submit', :value => 'Save' }
+
+      #documents
+        %h2 Documents
+
+        - @documents.each do |document|
+          %div[document]
+            %h3
+              %a{ :href => '/documents/' + document.id }
+                = document.title
+
+            %p.created_at= document.created_at
+
+            :markdown
+              #{document.body}
+
+      %footer
+        %a{ :href => 'http://jamesconroyfinn.com' }
+          James Conroy-Finn

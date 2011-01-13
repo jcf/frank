@@ -1,0 +1,22 @@
+!!! 5
+%html
+  %head
+    %title #{@document.title} - Frank Loves Documents
+    %link{ :rel => 'stylesheet', :href => '/frank.css', :type => 'text/css', :media => 'screen, projector' }
+  %body
+    #container
+      %h1
+        %a{ :href => '/' }
+          Frank Loves Documents
+
+      %div[@document]
+        %h2= @document.title
+        %p.created_at= @document.created_at
+
+        :markdown
+          #{@document.body}
+
+      %footer
+        %a{ :href => 'http://jamesconroyfinn.com' }
+          James Conroy-Finn
+
